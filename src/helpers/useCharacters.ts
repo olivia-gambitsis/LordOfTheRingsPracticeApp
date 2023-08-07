@@ -6,28 +6,22 @@ import { RACES } from "./enums";
 
 export function useCharacters() {
  
-  const getCharacters = useCharacterStore((state) => state.fetchAllCharacters);
-  const getOneCharacter = useCharacterStore((state) => state.fetchSpecificCharacter);
 	const characterList : ICharacter[] = useCharacterStore((state) => state.characters)
-
-	useEffect(() => {
-			getCharacters()
-	}, [getCharacters])
  
-  const findAllHumans = () => characterList.find(character => character.race === RACES.Human)
+  const humanCharacters = () => characterList.filter(character => character.race === RACES.Human)
 
-  const findAllDwarfs = () => characterList.find(character => character.race === RACES.Dwarf) 
+  const dwarfCharacters = () => characterList.filter(character => character.race === RACES.Dwarf) 
 
-  const findAllElves = () => characterList.find(character => character.race === RACES.Elf) 
+  const elfCharacters = () => characterList.filter(character => character.race === RACES.Elf) 
 
-  const findAllHobbits = () => characterList.find(character => character.race === RACES.Hobbit)
+  const hobbitCharacters = () => characterList.filter(character => character.race === RACES.Hobbit)
 
 
   return { 
-    findAllHumans, 
-    findAllDwarfs, 
-    findAllElves, 
-    findAllHobbits,
+    humanCharacters,
+    dwarfCharacters,
+    elfCharacters,
+    hobbitCharacters,
     characterList
   };
 }

@@ -11,7 +11,7 @@ export const useCharacterStore = create<ICharacterState>()(
         set(() => ({ isLoading: true }));
         try {
           const response = await axios.get<IAPIResponse>(
-            `${import.meta.env.VITE_LOTR_API_URL}/character`,
+            `${import.meta.env.VITE_LOTR_API_URL}/character?limit=100`,
             {
               headers: {
                 'Authorization': `Bearer ${import.meta.env.VITE_LOTR_API_KEY}`,
@@ -34,7 +34,7 @@ export const useCharacterStore = create<ICharacterState>()(
         set(() => ({ isLoading: true }));
         try {
           const response = await axios.get<IAPIResponse>(
-            `${import.meta.env.VITE_LOTR_API_URL}/character?_id=${id}`,
+            `${import.meta.env.VITE_LOTR_API_URL}/character/${id}`,
             {
               headers: {
                 'Authorization': `Bearer ${import.meta.env.VITE_LOTR_API_KEY}`,

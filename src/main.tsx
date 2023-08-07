@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './App';
 import Landing from './pages/Landing';
-import {Home} from './pages/Home';
+import { CharacterDetailPage } from './pages/CharacterDetailPage';
 
 export const routes = [
 	{
@@ -16,8 +16,8 @@ export const routes = [
 				element: <Landing />
 			},
 			{
-				path: '/home',
-				element: <Home/>
+				path: '/character-details/:id',
+				element: <CharacterDetailPage/>
 			}
 		]
 	}

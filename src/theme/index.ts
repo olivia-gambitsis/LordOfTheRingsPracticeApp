@@ -4,6 +4,7 @@ export const theme: MantineThemeOverride = {
 	colorScheme: "light",
 	primaryColor: "primary",
 	primaryShade: 6,
+	loader: 'dots',
 	fontFamily: 'Outfit,sans-serif',
 	fontFamilyMonospace: 'Monaco, Courier, monospace',
 	fontSizes: { // 16px
@@ -83,11 +84,10 @@ export const theme: MantineThemeOverride = {
 			styles: {
 				label: {
 					fontSize: '1rem',
-					color: '#DCE7FCFF',
+					color: 'black',
 				},
 				input: {
 					borderRadius: '2rem !important',
-					backgroundColor: '#DCE7FCFF',
 				}
 			}
 		},

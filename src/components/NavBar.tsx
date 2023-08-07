@@ -1,35 +1,35 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
-import { LogoutButton } from "./buttons/LogoutButton";
-import { LoginButton } from "./buttons/LoginButton";
+import { Link } from "react-router-dom";
+import AuthenticationButton from "./buttons/AuthenticationButton";
+import { Flex, Image, Navbar, Text } from "@mantine/core";
+import { OneRingInscription } from "./Images";
 
 export interface INavBarProps {}
 
 const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
+  const { isAuthenticated } = useAuth0();
 
-  const {user, isLoading, isAuthenticated} = useAuth0()
-  console.log(isAuthenticated)
+  if (!isAuthenticated) {
+    return null;
+  }
   return (
-    <div>
-      {/* <Link to="/">
-        Home
-      </Link> */}
-      <ul className="flex flex-row gap-10">
-        {/* <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
-          <Link to="/something">Something</Link>
-        </li>
-        <li>
-          <Link to="/something-else">Something else</Link>
-        </li> */}
-        <li>
-          {isAuthenticated ? <LogoutButton/> : <LoginButton/>}
-        </li>
-      </ul>
-    </div>
+    <Navbar
+      height={"4rem"}
+      p={"md"}
+      style={{ borderBottom: "1px solid lightGray " }}
+    >
+      <Navbar.Section>
+        <Flex justify={"space-between"} align={"center"}>
+          <Flex direction={"row"} gap={"md"}>
+            <Link to="/">
+              <OneRingInscription width={"45"} height={"45"}/>
+            </Link>
+          </Flex>
+          <AuthenticationButton />
+        </Flex>
+      </Navbar.Section>
+    </Navbar>
   );
 };
 
