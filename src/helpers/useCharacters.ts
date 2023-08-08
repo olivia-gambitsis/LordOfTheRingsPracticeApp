@@ -1,27 +1,33 @@
-import { useEffect } from "react";
-import { useCharacterStore } from "../store/characterStore";
-import { ICharacter } from "./types";
-import { RACES } from "./enums";
+import { ICharacter, RACES } from "./interfaces";
+import { useState } from "react";
 
+export const useCharacters = (characterList: ICharacter[]) => {
 
-export function useCharacters() {
- 
-	const characterList : ICharacter[] = useCharacterStore((state) => state.characters)
- 
-  const humanCharacters = () => characterList.filter(character => character.race === RACES.Human)
+  const humanCharacters = () =>
+    characterList.filter(
+      (character: ICharacter) => character.race === RACES.Human
+    );
 
-  const dwarfCharacters = () => characterList.filter(character => character.race === RACES.Dwarf) 
+  const dwarfCharacters = () =>
+    characterList.filter(
+      (character: ICharacter) => character.race === RACES.Dwarf
+    );
 
-  const elfCharacters = () => characterList.filter(character => character.race === RACES.Elf) 
+  const elfCharacters = () =>
+    characterList.filter(
+      (character: ICharacter) => character.race === RACES.Elf
+    );
 
-  const hobbitCharacters = () => characterList.filter(character => character.race === RACES.Hobbit)
+  const hobbitCharacters = () =>
+    characterList.filter(
+      (character: ICharacter) => character.race === RACES.Hobbit
+    );
 
-
-  return { 
+  return {
+    characterList,
     humanCharacters,
     dwarfCharacters,
     elfCharacters,
     hobbitCharacters,
-    characterList
   };
-}
+};

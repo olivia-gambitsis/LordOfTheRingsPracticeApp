@@ -1,15 +1,13 @@
-import { ICharacter } from "../helpers/types";
+import { ICharacter } from "../helpers/interfaces";
 import {
   Button,
   Card,
-  Group,
   Text,
   Image,
   Center,
   Flex,
-  Col,
 } from "@mantine/core";
-import { RACES } from "../helpers/enums";
+import { RACES } from "../helpers/interfaces";
 
 interface ISmallCharacterCard {
   character: ICharacter;

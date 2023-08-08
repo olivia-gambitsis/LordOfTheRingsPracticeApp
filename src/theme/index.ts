@@ -4,7 +4,7 @@ export const theme: MantineThemeOverride = {
 	colorScheme: "light",
 	primaryColor: "primary",
 	primaryShade: 6,
-	loader: 'dots',
+	loader: 'oval',
 	fontFamily: 'Outfit,sans-serif',
 	fontFamilyMonospace: 'Monaco, Courier, monospace',
 	fontSizes: { // 16px

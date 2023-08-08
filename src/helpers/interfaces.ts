@@ -20,19 +20,14 @@ export interface ICharacterQuote {
   id: string;
 }
 
+export enum RACES {
+  Elf = "Elf",
+  Dwarf = "Dwarf",
+  Human = "Human",
+  Hobbit = "Hobbit",
+}
+
 export interface ICharacterState {
   characters: ICharacter[];
-  fetchAllCharacters: () => void;
-  fetchSpecificCharacter: (id: string) => void;
-  isLoading?: boolean;
-}
-
-export interface IAPIResponse {
-  docs: ICharacter[];
-  total: number;
-}
-
-export interface IQuoteAPIResponse {
-  docs: ICharacter[];
-  total: number;
+  setCharacters: (characters: ICharacter[]) => void;
 }

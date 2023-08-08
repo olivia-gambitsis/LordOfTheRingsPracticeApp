@@ -4,19 +4,42 @@
   top: 50vh;
   left: 50%;
   transform: translate(-50%, -50%);
+  text-align: center;
+}
 
-  .one-ring-inscription {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-     .info {
-      text-align: center;
-     .text {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-    }
+.one-ring-inscription {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 300px;
+  .text {
+    text-align: center;
+    margin-bottom: 20px;
   }
+}
+
+@media only screen and (max-width: 600px) {
+  .one-ring-inscription{
+    display: none;
+  }
+}
+
+.loader {
+  width: 100%;
+  position: absolute;
+  top: 50vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.navBar {
+  padding: 0.5rem;
+  border-bottom: 1px solid lightgray;
 }

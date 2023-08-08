@@ -1,41 +1,31 @@
-import axios from "axios";
-import { FC, useEffect, useState } from "react";
-import { ICharacter } from "../helpers/types";
-import { useLocation, useParams } from "react-router-dom";
+import { FC, useState } from "react";
+import { ICharacter } from "../helpers/interfaces";
+import { useParams } from "react-router-dom";
 import { CharacterDetailCard } from "../components/CharacterDetailCard";
+import { useQuery } from "@tanstack/react-query";
+import { getCharacterByID } from "../services/characterService";
+import { Loader } from "@mantine/core";
 
-interface ICharacterDetailPage {
-  id: string;
-}
 
-export const CharacterDetailPage = () => {
+export const CharacterDetailPage: FC = () => {
   const [character, setCharacter] = useState<ICharacter>();
-  const [isLoading, setIsLoading] = useState<Boolean>();
   let { id } = useParams();
 
-  useEffect(() => {
-    axios
-      .get(
-        `${import.meta.env.VITE_LOTR_API_URL}/character/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_LOTR_API_KEY}`,
-            Accept: "application/json",
-          },
-        }
-      )
-      .then((res) => {
-        setCharacter(res.data.docs[0]);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        console.error(err);
-      });
-  }, []);
+  const { isLoading, data } = useQuery({
+    queryKey: ["query-character-by-id"],
+    queryFn: async () => {
+      return await getCharacterByID(id);
+    },
+    onSuccess: (res) => {
+      setCharacter(res.docs[0]);
+    },
+  });
 
 
   return (
-    <div>{character && <CharacterDetailCard character={character} />}</div>
+    <div>
+      {isLoading && <Loader className="loader" color="yellow.5" />}
+      <div>{character && <CharacterDetailCard character={character} />}</div>
+    </div>
   );
 };

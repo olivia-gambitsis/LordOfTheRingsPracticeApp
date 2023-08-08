@@ -8,8 +8,7 @@ export const LogoutButton = () => {
     <Button
       color="yellow.5"
       variant="outline"
-      radius={'xl'}
-      
+      radius={"xl"}
       onClick={() =>
         logout({
           logoutParams: { returnTo: window.location.origin },

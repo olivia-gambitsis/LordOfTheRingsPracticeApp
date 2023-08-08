@@ -1,15 +1,25 @@
-import { FC, useEffect } from "react";
-import { Center, Container, Flex, Title, createStyles } from "@mantine/core";
+import { FC } from "react";
+import { Loader } from "@mantine/core";
 import { useAuth0 } from "@auth0/auth0-react";
 import { LoginButton } from "../components/buttons/LoginButton";
 import { CharacterList } from "../components/CharacterList";
-import { useCharacterStore } from "../store/characterStore";
 import { OneRingInscription } from "../components/Images";
+import { useQuery } from "@tanstack/react-query";
+import { getAllCharacters } from "../services/characterService";
 
-const Login: FC = () => {
-  const { user, isAuthenticated } = useAuth0();
+export const LandingPage: FC = () => {
+  const { isLoading: authIsLoading, isAuthenticated } = useAuth0();
 
-  const characters = useCharacterStore((state) => state.characters);
+  const { isLoading, data } = useQuery({
+    queryKey: ["get-all-characters"],
+    queryFn: async () => {
+      return await getAllCharacters();
+    },
+  });
+
+   if(authIsLoading){
+    return  <Loader className="loader" color="yellow.5" />
+   }
 
   return (
     <>
@@ -17,17 +27,17 @@ const Login: FC = () => {
         <div className="landing-page">
           <div className="one-ring-inscription">
             <OneRingInscription />
-            <div className="one-ring-inscription info">
-              <h3 className="text">Login to see lord of the rings characters</h3>
-              <LoginButton />
-            </div>
+          </div>
+          <div className="info">
+            <h3 className="text">Login to see lord of the rings characters</h3>
+            <LoginButton />
           </div>
         </div>
+      ) : isLoading ? (
+        <Loader className="loader" color="yellow.5" />
       ) : (
-        <CharacterList data={characters} />
+        data && <CharacterList allCharacters={data?.docs} />
       )}
     </>
   );
 };
-
-export default Login;
